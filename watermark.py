@@ -20,8 +20,6 @@ try:
 except FileNotFoundError:
     print('Watermark not found')
     raise
-print(wtr_mark)
-print(inputs[len(inputs) - 1])
 
 for file in files:
     old_pdf = PyPDF2.PdfFileReader(file)
