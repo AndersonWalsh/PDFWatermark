@@ -14,8 +14,8 @@ for file in inputs:
         print(f'File {file} not found')
 
 try:
-    wtr_mark = open(inputs[len(inputs) - 1], 'rb')
-    wtr_mark = PyPDF2.PdfFileReader(wtr_mark)
+    wtr_mark_file = open(inputs[len(inputs) - 1], 'rb')
+    wtr_mark = PyPDF2.PdfFileReader(wtr_mark_file)
     wtr_mark = wtr_mark.getPage(0)
 except FileNotFoundError:
     print('Watermark not found')
@@ -28,4 +28,9 @@ for file in files:
         page = old_pdf.getPage(page_num)
         page.mergePage(wtr_mark)
         wtr_pdf.addPage(page)
-    wtr_pdf.write(open(f'wtr_{file.name}.pdf', 'wb'))
+    wtr_pdf_file = open(f'wtr_{file.name}', 'wb')
+    wtr_pdf.write(wtr_pdf_file)
+    wtr_pdf_file.close()
+    file.close()
+
+wtr_mark_file.close()
